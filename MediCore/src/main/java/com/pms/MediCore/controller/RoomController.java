@@ -1,6 +1,8 @@
 package com.pms.MediCore.controller;
 
+import com.pms.MediCore.dto.request.PatientRoomSearchRequest;
 import com.pms.MediCore.dto.request.RoomRequest;
+import com.pms.MediCore.dto.response.PatientRoomSearchResponse;
 import com.pms.MediCore.dto.response.RoomResponse;
 import com.pms.MediCore.service.RoomService;
 import org.springframework.http.HttpStatus;
@@ -41,4 +43,11 @@ public class RoomController {
         List<RoomResponse> rooms=roomService.updateRoom(roomRequest);
         return ResponseEntity.status(HttpStatus.OK).body(rooms);
     }
+    @PostMapping("/search")
+    public ResponseEntity<List<PatientRoomSearchResponse>>searchRoom(@RequestBody PatientRoomSearchRequest patientRoomSearchRequest){
+        List<PatientRoomSearchResponse> patientRoomSearchResponse=roomService.searchRoom(patientRoomSearchRequest);
+        return ResponseEntity.status(HttpStatus.OK).body(patientRoomSearchResponse);
+    }
+
+
 }
