@@ -1,12 +1,18 @@
 package com.pms.MediCore.serviceImplementation;
 
+import com.pms.MediCore.dto.request.PatientRoomSearchRequest;
 import com.pms.MediCore.dto.request.RoomRequest;
+import com.pms.MediCore.dto.response.PatientRoomSearchResponse;
 import com.pms.MediCore.dto.response.RoomResponse;
 import com.pms.MediCore.entity.PatientRoom;
 import com.pms.MediCore.entity.Room;
 import com.pms.MediCore.repository.PatientRoomRepository;
+import com.pms.MediCore.repository.PatientRoomSearchRepository;
 import com.pms.MediCore.repository.RoomRepository;
 import com.pms.MediCore.service.RoomService;
+import com.pms.MediCore.view.PatientRoomSearch;
+import org.hibernate.jdbc.Expectation;
+import org.hibernate.jdbc.Expectations;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +26,13 @@ public class RoomServiceImpl implements RoomService {
     private final RoomRepository roomRepository;
     private final ModelMapper modelMapper;
     private final PatientRoomRepository patientRoomRepository;
+    private final PatientRoomSearchRepository patientRoomSearchRepository;
 
-    public RoomServiceImpl(RoomRepository roomRepository, ModelMapper modelMapper, PatientRoomRepository patientRoomRepository) {
+    public RoomServiceImpl(RoomRepository roomRepository, ModelMapper modelMapper, PatientRoomRepository patientRoomRepository, PatientRoomSearchRepository patientRoomSearchRepository) {
         this.roomRepository = roomRepository;
         this.modelMapper = modelMapper;
         this.patientRoomRepository = patientRoomRepository;
+        this.patientRoomSearchRepository = patientRoomSearchRepository;
     }
 
     @Override
@@ -100,5 +108,22 @@ public class RoomServiceImpl implements RoomService {
             }
         });
         return savedRoom.stream().map(r -> modelMapper.map(r, RoomResponse.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PatientRoomSearchResponse> searchRoom(PatientRoomSearchRequest patientRoomSearchRequest){
+        try{
+            List<PatientRoomSearch> patientRoomSearch= patientRoomSearchRepository.searchPatientRoomsByFilters(
+                    patientRoomSearchRequest.getPatientRegNo()==null? "" : patientRoomSearchRequest.getPatientRegNo(),
+                    patientRoomSearchRequest.getWard()==null? -2L : patientRoomSearchRequest.getWard(),
+                    patientRoomSearchRequest.getRoomType()==null? -2L : patientRoomSearchRequest.getRoomType(),
+                    patientRoomSearchRequest.getRoomCategory()==null? -2L : patientRoomSearchRequest.getRoomCategory()
+            );
+            return patientRoomSearch.stream().map(p->modelMapper.map(p, PatientRoomSearchResponse.class)).collect(Collectors.toList());
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }
