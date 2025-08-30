@@ -2,127 +2,154 @@ package com.pms.MediCore.dto.response;
 
 import java.util.Date;
 
-public class FoodResponse {
+public class FoodSearchResponse {
 
     private Long id;
     private Long patientId;
     private String patientRegNo;
-    private Long roomId;
+    private String patientName;
     private Long roomNo;
+    private Long roomId;
     private Long mealType;
+    private String mealTypeName;
     private Long mealId;
     private String mealCode;
     private String mealName;
     private Date mealDate;
-    private Date createdDate;
-    private Date updatedDate;
     private Long active;
-    private Long status;
+    private String activeValue;
 
-    public FoodResponse() {
+    public FoodSearchResponse() {
 
     }
-
-    public FoodResponse(Long id, Long patientId, String patientRegNo, Long roomId, Long roomNo,
-                        Long mealType, Long mealId, String mealCode, String mealName, Date mealDate,
-                        Date createdDate, Date updatedDate, Long active, Long status){
+    public FoodSearchResponse(Long id, Long patientId, String patientRegNo, String patientName, Long roomNo, Long roomId,
+                              Long mealType, String mealTypeName, Long mealId, String mealCode, String mealName, Date mealDate,
+                              Long active, String activeValue){
         this.id = id;
         this.patientId = patientId;
         this.patientRegNo = patientRegNo;
-        this.roomId = roomId;
+        this.patientName = patientName;
         this.roomNo = roomNo;
+        this.roomId = roomId;
         this.mealType = mealType;
+        this.mealTypeName = mealTypeName;
         this.mealId = mealId;
         this.mealCode = mealCode;
         this.mealName = mealName;
         this.mealDate = mealDate;
-        this.createdDate = createdDate;
-        this.updatedDate = updatedDate;
         this.active = active;
-        this.status = status;
+        this.activeValue = activeValue;
     }
+
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
     public Long getPatientId() {
         return patientId;
     }
+
     public void setPatientId(Long patientId) {
         this.patientId = patientId;
     }
+
     public String getPatientRegNo() {
         return patientRegNo;
     }
+
     public void setPatientRegNo(String patientRegNo) {
         this.patientRegNo = patientRegNo;
     }
-    public Long getRoomId() {
-        return roomId;
+
+    public String getPatientName() {
+        return patientName;
     }
-    public void setRoomId(Long roomId) {
-        this.roomId = roomId;
+
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
     }
+
     public Long getRoomNo() {
         return roomNo;
     }
+
     public void setRoomNo(Long roomNo) {
         this.roomNo = roomNo;
     }
+
+    public Long getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(Long roomId) {
+        this.roomId = roomId;
+    }
+
     public Long getMealType() {
         return mealType;
     }
+
     public void setMealType(Long mealType) {
         this.mealType = mealType;
     }
+
+    public String getMealTypeName() {
+        return mealTypeName;
+    }
+
+    public void setMealTypeName(String mealTypeName) {
+        this.mealTypeName = mealTypeName;
+    }
+
     public Long getMealId() {
         return mealId;
     }
+
     public void setMealId(Long mealId) {
         this.mealId = mealId;
     }
+
     public String getMealCode() {
         return mealCode;
     }
+
     public void setMealCode(String mealCode) {
         this.mealCode = mealCode;
     }
+
     public String getMealName() {
         return mealName;
     }
+
     public void setMealName(String mealName) {
         this.mealName = mealName;
     }
+
     public Date getMealDate() {
         return mealDate;
     }
+
     public void setMealDate(Date mealDate) {
         this.mealDate = mealDate;
     }
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-    public Date getUpdatedDate() {
-        return updatedDate;
-    }
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
-    }
+
     public Long getActive() {
         return active;
     }
+
     public void setActive(Long active) {
         this.active = active;
     }
-    public Long getStatus() {
-        return status;
+
+    public String getActiveValue() {
+        return activeValue;
     }
-    public void setStatus(Long status) {
-        this.status = status;
+
+    public void setActiveValue(String activeValue) {
+        this.activeValue = activeValue;
     }
 }

@@ -36,6 +36,9 @@ public class Food {
     @Column(name = "meal_name")
     private String mealName;
 
+    @Column(name = "meal_date")
+    private Date mealDate;
+
     @Column(name = "created_date")
     private Date createdDate;
 
@@ -51,7 +54,7 @@ public class Food {
     public Food(){
 
     }
-    public Food(Long id, Long patientId, String patientRegNo, Long roomId, Long roomNo, Long mealType, Long mealId, String mealCode, String mealName, Date createdDate, Date updatedDate, Long active, Long status) {
+    public Food(Long id, Long patientId, String patientRegNo, Long roomId, Long roomNo, Long mealType, Long mealId, String mealCode, String mealName, Date mealDate, Date createdDate, Date updatedDate, Long active, Long status) {
         this.id = id;
         this.patientId = patientId;
         this.patientRegNo = patientRegNo;
@@ -61,6 +64,7 @@ public class Food {
         this.mealId = mealId;
         this.mealCode = mealCode;
         this.mealName = mealName;
+        this.mealDate = mealDate;
         this.createdDate = createdDate;
         this.updatedDate = updatedDate;
         this.active = active;
@@ -120,6 +124,14 @@ public class Food {
     public void setMealName(String mealName) {
         this.mealName = mealName;
     }
+
+    public Date getMealDate() {
+        return mealDate;
+    }
+    public void setMealDate(Date mealDate) {
+        this.mealDate = mealDate;
+    }
+
     public Date getCreatedDate() {
         return createdDate;
     }

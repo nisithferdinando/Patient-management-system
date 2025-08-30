@@ -1,5 +1,7 @@
 package com.pms.MediCore.dto.request;
 
+import java.util.Date;
+
 public class FoodRequest {
 
     private Long id;
@@ -11,6 +13,7 @@ public class FoodRequest {
     private Long mealId;
     private String mealCode;
     private String mealName;
+    private Date mealDate;
     private Long active;
     private Long status;
 
@@ -18,7 +21,7 @@ public class FoodRequest {
 
     }
     public FoodRequest(Long id, Long patientId, String patientRegNo, Long roomId, Long roomNo,
-                       Long mealType, Long mealId, String mealCode, String mealName,
+                       Long mealType, Long mealId, String mealCode, String mealName, Date mealDate,
                        Long active, Long status ){
         this.id = id;
         this.patientId = patientId;
@@ -28,6 +31,7 @@ public class FoodRequest {
         this.mealType = mealType;
         this.mealCode = mealCode;
         this.mealName = mealName;
+        this.mealDate = mealDate;
         this.active = active;
         this.status = status;
 
@@ -85,6 +89,12 @@ public class FoodRequest {
     }
     public void setMealName(String mealName) {
         this.mealName = mealName;
+    }
+    public Date getMealDate() {
+        return mealDate;
+    }
+    public void setMealDate(Date mealDate) {
+        this.mealDate = mealDate;
     }
     public Long getActive() {
         return active;
