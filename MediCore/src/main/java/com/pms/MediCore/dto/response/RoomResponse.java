@@ -12,6 +12,7 @@ public class RoomResponse {
     private Long roomCategory;
     private Long roomType;
     private Long roomNo;
+    private Long room;
     private String bedNo;
     private Date startDate;
     private Date endDate;
@@ -23,7 +24,7 @@ public class RoomResponse {
     public RoomResponse(){
 
     }
-    public RoomResponse(Long roomId, Long admissionId, Long patientId, Long ward, String patientRegNo, Long roomCategory, Long roomType, Long roomNo, String bedNo, Date startDate, Date endDate, Long active, Long roomStatus, Date createdDate, Date updatedDate) {
+    public RoomResponse(Long roomId, Long admissionId, Long patientId, Long ward, String patientRegNo, Long roomCategory, Long roomType, Long roomNo, Long room, String bedNo, Date startDate, Date endDate, Long active, Long roomStatus, Date createdDate, Date updatedDate) {
         this.roomId = roomId;
         this.admissionId = admissionId;
         this.patientId = patientId;
@@ -32,6 +33,7 @@ public class RoomResponse {
         this.roomCategory = roomCategory;
         this.roomType = roomType;
         this.roomNo = roomNo;
+        this.room = room;
         this.bedNo = bedNo;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -90,6 +92,12 @@ public class RoomResponse {
    }
    public String getBedNo(){
         return bedNo;
+   }
+   public Long getRoom(){
+        return room;
+   }
+   public void setRoom(Long room){
+        this.room=room;
    }
    public void setBedNo(String bedNo){
         this.bedNo=bedNo;

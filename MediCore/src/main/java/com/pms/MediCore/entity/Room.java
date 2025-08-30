@@ -31,6 +31,9 @@ public class Room {
     @Column(name = "room_type")
     private Long roomType;
 
+    @Column(name = "room")
+    private Long room;
+
     @Column(name = "room_no")
     private Long roomNo;
 
@@ -59,7 +62,7 @@ public class Room {
 
     }
 
-    public Room(Long roomId, Long admissionId, Long patientId, String patientRegNo, Long ward, Long roomCategory, Long roomType, Long roomNo, String bedNo, Date startDate, Date endDate, Long active, Long roomStatus, Date createdDate, Date updatedDate){
+    public Room(Long roomId, Long admissionId, Long patientId, String patientRegNo, Long ward, Long roomCategory, Long roomType, Long roomNo, Long room, String bedNo, Date startDate, Date endDate, Long active, Long roomStatus, Date createdDate, Date updatedDate){
         this.roomId=roomId;
         this.admissionId=admissionId;
         this.patientId=patientId;
@@ -68,6 +71,7 @@ public class Room {
         this.roomCategory=roomCategory;
         this.roomType=roomType;
         this.roomNo=roomNo;
+        this.room=room;
         this.bedNo=bedNo;
         this.startDate=startDate;
         this.endDate=endDate;
@@ -125,6 +129,14 @@ public class Room {
     public void setRoomNo(Long roomNo){
         this.roomNo=roomNo;
     }
+
+    public Long getRoom(){
+        return room;
+    }
+    public void setRoom(Long room){
+        this.room=room;
+    }
+
     public String getBedNo(){
         return bedNo;
     }
