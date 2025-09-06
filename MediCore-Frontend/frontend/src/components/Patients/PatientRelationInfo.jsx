@@ -54,7 +54,7 @@ const PatientRelationInfo = ({dropDownData, onRefsReady, onInputChange, editPati
                         <select
                             ref={refs.relationState}
                             onChange={() => handleInputChange('relationState')}
-                            className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full border border-slate-300 rounded-md shadow-sm py-3 px-3 focus:outline-none  focus:ring-slate-500 focus:ring-0 focus:border-slate-500"
                         >
                             <option value="">Select Relation State</option>
                             {dropDownData.relationState?.map((item) => (
@@ -74,7 +74,7 @@ const PatientRelationInfo = ({dropDownData, onRefsReady, onInputChange, editPati
                             type="text"
                             ref={refs.relationName}
                             onChange={() => handleInputChange('relationName')}
-                            className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full border border-slate-300 rounded-md shadow-sm py-3 px-3 focus:outline-none  focus:ring-slate-500 focus:ring-0 focus:border-slate-500"
                         />
                         {errors.relationName &&
                             <p className="text-red-500 text-base mt-2 pl-1 ">{errors.relationName}</p>}
@@ -87,7 +87,7 @@ const PatientRelationInfo = ({dropDownData, onRefsReady, onInputChange, editPati
                             type="tel"
                             ref={refs.relationNo}
                             onChange={() => handleInputChange('relationNo')}
-                            className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full border border-slate-300 rounded-md shadow-sm py-3 px-3 focus:outline-none  focus:ring-slate-500 focus:ring-0 focus:border-slate-500"
                         />
                         {errors.relationNo && <p className="text-red-500 text-base mt-2 pl-1 ">{errors.relationNo}</p>}
                     </div>
@@ -101,7 +101,7 @@ const PatientRelationInfo = ({dropDownData, onRefsReady, onInputChange, editPati
                             type="date"
                             ref={refs.regDate}
                             onChange={() => handleInputChange('regDate')}
-                            className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full border border-slate-300 rounded-md shadow-sm py-3 px-3 focus:outline-none  focus:ring-slate-500 focus:ring-0 focus:border-slate-500"
                         />
                         {errors.regDate && <p className="text-red-500 text-base mt-2 pl-1 ">{errors.regDate}</p>}
                     </div>
@@ -113,7 +113,7 @@ const PatientRelationInfo = ({dropDownData, onRefsReady, onInputChange, editPati
                             type="time"
                             ref={refs.regTime}
                             onChange={() => handleInputChange('regTime')}
-                            className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full border border-slate-300 rounded-md shadow-sm py-3 px-3 focus:outline-none  focus:ring-slate-500 focus:ring-0 focus:border-slate-500"
                         />
                         {errors.regTime && <p className="text-red-500 text-base mt-2 pl-1 ">{errors.regTime}</p>}
                     </div>

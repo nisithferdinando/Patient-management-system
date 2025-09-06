@@ -48,7 +48,7 @@ const PatientContactInfo = ({dropDownData, onRefsReady, onInputChange, editPatie
                             type="tel"
                             ref={refs.contactNo}
                             onChange={() => handleInputChange('contactNo')}
-                            className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full border border-slate-300 rounded-md shadow-sm py-3 px-3 focus:outline-none  focus:ring-slate-500 focus:ring-0 focus:border-slate-500"
                         />
                         {errors.contactNo && <p className="text-red-500 text-base mt-2 pl-1 ">{errors.contactNo}</p>}
                     </div>
@@ -60,7 +60,7 @@ const PatientContactInfo = ({dropDownData, onRefsReady, onInputChange, editPatie
                             type="email"
                             ref={refs.email}
                             onChange={() => handleInputChange('email')}
-                            className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full border border-slate-300 rounded-md shadow-sm py-3 px-3 focus:outline-none  focus:ring-slate-500 focus:ring-0 focus:border-slate-500"
                         />
                         {errors.email && <p className="text-red-500 text-base mt-2 pl-1 ">{errors.email}</p>}
                     </div>
@@ -72,7 +72,7 @@ const PatientContactInfo = ({dropDownData, onRefsReady, onInputChange, editPatie
                             type="text"
                             ref={refs.addressNo}
                             onChange={() => handleInputChange('addressNo')}
-                            className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full border border-slate-300 rounded-md shadow-sm py-3 px-3 focus:outline-none  focus:ring-slate-500 focus:ring-0 focus:border-slate-500"
                         />
                         {errors.addressNo && <p className="text-red-500 text-base mt-2 pl-1 ">{errors.addressNo}</p>}
                     </div>
@@ -84,7 +84,7 @@ const PatientContactInfo = ({dropDownData, onRefsReady, onInputChange, editPatie
                             type="text"
                             ref={refs.address}
                             onChange={() => handleInputChange('address')}
-                            className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full border border-slate-300 rounded-md shadow-sm py-3 px-3 focus:outline-none  focus:ring-slate-500 focus:ring-0 focus:border-slate-500"
                         />
                         {errors.address && <p className="text-red-500 text-base mt-2 pl-1 ">{errors.address}</p>}
                     </div>
@@ -99,7 +99,7 @@ const PatientContactInfo = ({dropDownData, onRefsReady, onInputChange, editPatie
                             type="text"
                             ref={refs.stateName}
                             onChange={() => handleInputChange('stateName')}
-                            className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full border border-slate-300 rounded-md shadow-sm py-3 px-3 focus:outline-none  focus:ring-slate-500 focus:ring-0 focus:border-slate-500"
                         />
                         {errors.stateName && <p className="text-red-500 text-base mt-2 pl-1 ">{errors.stateName}</p>}
                     </div>
@@ -111,7 +111,7 @@ const PatientContactInfo = ({dropDownData, onRefsReady, onInputChange, editPatie
                             type="text"
                             ref={refs.country}
                             onChange={() => handleInputChange('country')}
-                            className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full border border-slate-300 rounded-md shadow-sm py-3 px-3 focus:outline-none  focus:ring-slate-500 focus:ring-0 focus:border-slate-500"
                         />
                         {errors.country && <p className="text-red-500 text-base mt-2 pl-1 ">{errors.country}</p>}
                     </div>
@@ -123,7 +123,7 @@ const PatientContactInfo = ({dropDownData, onRefsReady, onInputChange, editPatie
                             type="text"
                             ref={refs.emergencyContactNo}
                             onChange={() => handleInputChange('emergencyContactNo')}
-                            className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full border border-slate-300 rounded-md shadow-sm py-3 px-3 focus:outline-none  focus:ring-slate-500 focus:ring-0 focus:border-slate-500"
                         />
                         {errors.emergencyContactNo && <p className="text-red-500 text-base mt-2 pl-1 ">{errors.emergencyContactNo}</p>}
                     </div>
