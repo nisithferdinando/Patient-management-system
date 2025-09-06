@@ -7,6 +7,7 @@ import Home from './pages/Home.jsx';
 import Doctors from './pages/Doctors.jsx';
 import Patients from "./pages/Patients.jsx";
 import Admission from './pages/Admission.jsx'
+import PatientRoom from "./pages/PatientRoom.jsx";
 
 const Routers = () => {
     return (
@@ -20,6 +21,7 @@ const Routers = () => {
                     <Route path="doctors" element={<Doctors/>}/>
                     <Route path="patients" element={<Patients/>}/>
                     <Route path="/addmission" element={<Admission/>}/>
+                    <Route path="/patients-rooms" element={<PatientRoom/>}/>
                 </Route>
 
                 <Route path="/" element={<Login/>}/>

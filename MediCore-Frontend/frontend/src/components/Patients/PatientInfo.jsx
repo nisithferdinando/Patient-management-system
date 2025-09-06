@@ -49,7 +49,7 @@ const PatientInfo = ({dropDownData, onRefsReady, onInputChange, editPatient}) =>
                         <select
                             ref={refs.state}
                             onChange={() => handleInputChange('state')}
-                            className="w-full border border-slate-300 rounded-md shadow-sm py-3 px-3 focus:outline-none focus:ring-slate-500 focus:ring-0 focus:border-slate-500"
+                            className="w-full border border-slate-300 rounded-md shadow-sm py-3 px-3 focus:outline-none  focus:ring-slate-500 focus:ring-0 focus:border-slate-500">
                         >
                             <option value=""> Select State</option>
                             {
@@ -70,7 +70,7 @@ const PatientInfo = ({dropDownData, onRefsReady, onInputChange, editPatient}) =>
                             type="text"
                             ref={refs.firstName}
                             onChange={() => handleInputChange('firstName')}
-                            className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full border border-slate-300 rounded-md shadow-sm py-3 px-3 focus:outline-none  focus:ring-slate-500 focus:ring-0 focus:border-slate-500"
                         />
                         {errors.firstName && <p className="text-red-500 text-base mt-2 pl-1">{errors.firstName}</p>}
                     </div>
@@ -83,7 +83,7 @@ const PatientInfo = ({dropDownData, onRefsReady, onInputChange, editPatient}) =>
                             type="text"
                             ref={refs.lastName}
                             onChange={() => handleInputChange('lastName')}
-                            className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full border border-slate-300 rounded-md shadow-sm py-3 px-3 focus:outline-none  focus:ring-slate-500 focus:ring-0 focus:border-slate-500"
                         />
                         {errors.lastName && <p className="text-red-500 text-base mt-2 pl-1">{errors.lastName}</p>}
                     </div>
@@ -97,7 +97,7 @@ const PatientInfo = ({dropDownData, onRefsReady, onInputChange, editPatient}) =>
                             type="date"
                             ref={refs.dateOfBirth}
                             onChange={() => handleInputChange('dateOfBirth')}
-                            className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full border border-slate-300 rounded-md shadow-sm py-3 px-3 focus:outline-none  focus:ring-slate-500 focus:ring-0 focus:border-slate-500"
                         />
                         {errors.dateOfBirth && <p className="text-red-500 text-base mt-2 pl-1">{errors.dateOfBirth}</p>}
                     </div>
@@ -110,7 +110,7 @@ const PatientInfo = ({dropDownData, onRefsReady, onInputChange, editPatient}) =>
                             type="number"
                             ref={refs.age}
                             onChange={() => handleInputChange('age')}
-                            className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full border border-slate-300 rounded-md shadow-sm py-3 px-3 focus:outline-none  focus:ring-slate-500 focus:ring-0 focus:border-slate-500"
                         />
                         {errors.age && <p className="text-red-500 text-base mt-2 pl-1">{errors.age}</p>}
                     </div>
@@ -122,7 +122,7 @@ const PatientInfo = ({dropDownData, onRefsReady, onInputChange, editPatient}) =>
                         <select
                             ref={refs.gender}
                             onChange={() => handleInputChange('gender')}
-                            className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full border border-slate-300 rounded-md shadow-sm py-3 px-3 focus:outline-none  focus:ring-slate-500 focus:ring-0 focus:border-slate-500"
                         >
                             <option value="">Select Gender</option>
                             {dropDownData.gender?.map((item) => (
@@ -140,7 +140,7 @@ const PatientInfo = ({dropDownData, onRefsReady, onInputChange, editPatient}) =>
                         <select
                             ref={refs.active}
                             onChange={() => handleInputChange('active')}
-                            className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full border border-slate-300 rounded-md shadow-sm py-3 px-3 focus:outline-none  focus:ring-slate-500 focus:ring-0 focus:border-slate-500"
 
                         >
                             <option value="">Select Status</option>
