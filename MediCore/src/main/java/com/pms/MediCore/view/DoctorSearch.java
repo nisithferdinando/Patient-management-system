@@ -1,10 +1,7 @@
 package com.pms.MediCore.view;
 
-import com.pms.MediCore.dto.response.FoodSearchResponse;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumns;
-import jakarta.persistence.ManyToMany;
 import org.hibernate.annotations.Immutable;
 
 @Entity
