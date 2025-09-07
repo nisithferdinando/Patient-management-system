@@ -50,7 +50,7 @@ const PatientInfo = ({dropDownData, onRefsReady, onInputChange, editPatient}) =>
                             ref={refs.state}
                             onChange={() => handleInputChange('state')}
                             className="w-full border border-slate-300 rounded-md shadow-sm py-3 px-3 focus:outline-none  focus:ring-slate-500 focus:ring-0 focus:border-slate-500">
-                        >
+
                             <option value=""> Select State</option>
                             {
                                 dropDownData.state?.map(item => (

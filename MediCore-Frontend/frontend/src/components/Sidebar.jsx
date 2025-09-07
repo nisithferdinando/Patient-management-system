@@ -38,10 +38,14 @@ const AppSidebar = ({visible, onHide}) => {
                 <Icon name="user"/>
                 Admissions
             </Menu.Item>
-            <Menu.Item as={Link} to='/patients-rooms' onClick={onHide}>
+            <Menu.Item as={Link} to="/patients-rooms" onClick={onHide}>
                        <Icon name="warehouse"/>
                 Patients Rooms
                 </Menu.Item>
+            <Menu.Item as={Link} to="/food" onClick={onHide}>
+                <Icon name="food"/>
+                Patients Food
+            </Menu.Item>
         </Sidebar>
 
         </div>
