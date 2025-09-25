@@ -4,7 +4,9 @@ import com.pms.MediCore.dto.request.AdmissionRequest;
 import com.pms.MediCore.dto.request.AdmissionSearchRequest;
 import com.pms.MediCore.dto.response.AdmissionResponse;
 import com.pms.MediCore.dto.response.AdmissionSearchResponse;
+import com.pms.MediCore.dto.response.PatientRegistrationNoResponse;
 import com.pms.MediCore.service.AdmissionService;
+import com.pms.MediCore.view.PatientRegistrationNo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,14 +17,14 @@ import java.util.List;
 @RequestMapping("/admission")
 public class AdmissionController {
 
-    private AdmissionService admissionService;
+    private final AdmissionService admissionService;
 
     public AdmissionController(AdmissionService admissionService) {
         this.admissionService = admissionService;
     }
 
     @PostMapping("/add")
-    ResponseEntity<AdmissionRequest> addAdmission(@RequestBody AdmissionRequest admissionRequest) {
+    public ResponseEntity<AdmissionRequest> addAdmission(@RequestBody AdmissionRequest admissionRequest) {
         try{
             AdmissionRequest request=admissionService.addAdmission(admissionRequest);
             return ResponseEntity.status(HttpStatus.CREATED).body(request);
@@ -34,7 +36,7 @@ public class AdmissionController {
     }
 
     @GetMapping("/all")
-    ResponseEntity<List<AdmissionResponse>> getAllAdmission() {
+   public ResponseEntity<List<AdmissionResponse>> getAllAdmission() {
         List<AdmissionResponse> admissionResponse=admissionService.getAllAdmissions();
         if(admissionResponse.isEmpty()){
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
@@ -43,21 +45,27 @@ public class AdmissionController {
     }
 
     @PutMapping("/update/{id}")
-    ResponseEntity<AdmissionResponse> updateAdmission(@PathVariable Long id, @RequestBody AdmissionRequest admissionRequest) {
+   public ResponseEntity<AdmissionResponse> updateAdmission(@PathVariable Long id, @RequestBody AdmissionRequest admissionRequest) {
         AdmissionResponse response=admissionService.updateAdmission(id, admissionRequest);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @GetMapping("/{id}")
-    ResponseEntity<AdmissionResponse> getAdmissionById(@PathVariable Long id){
+   public ResponseEntity<AdmissionResponse> getAdmissionById(@PathVariable Long id){
         AdmissionResponse response=admissionService.getAdmissionById(id);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @PostMapping("/search")
-    ResponseEntity<List<AdmissionSearchResponse>>searchAdmission(@RequestBody AdmissionSearchRequest admissionSearchRequest){
+  public ResponseEntity<List<AdmissionSearchResponse>>searchAdmission(@RequestBody AdmissionSearchRequest admissionSearchRequest){
         List<AdmissionSearchResponse> admission=admissionService.searchAdmissions(admissionSearchRequest);
         return ResponseEntity.status(HttpStatus.OK).body(admission);
+    }
+
+    @PostMapping("/dropdown/search")
+   public ResponseEntity<List<PatientRegistrationNoResponse>>getAdmissionRegNo(@RequestParam String regNo){
+        List<PatientRegistrationNoResponse> patientRegistrationNo= admissionService.getPatientRegistrationNo(regNo);
+        return ResponseEntity.status(HttpStatus.OK).body(patientRegistrationNo);
     }
 
 }

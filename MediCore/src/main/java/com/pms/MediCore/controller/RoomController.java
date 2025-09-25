@@ -1,8 +1,10 @@
 package com.pms.MediCore.controller;
 
 import com.pms.MediCore.dto.request.PatientRoomSearchRequest;
+import com.pms.MediCore.dto.request.RoomDropdownRequest;
 import com.pms.MediCore.dto.request.RoomRequest;
 import com.pms.MediCore.dto.response.PatientRoomSearchResponse;
+import com.pms.MediCore.dto.response.RoomDropdownResponse;
 import com.pms.MediCore.dto.response.RoomResponse;
 import com.pms.MediCore.service.RoomService;
 import org.springframework.http.HttpStatus;
@@ -47,6 +49,12 @@ public class RoomController {
     public ResponseEntity<List<PatientRoomSearchResponse>>searchRoom(@RequestBody PatientRoomSearchRequest patientRoomSearchRequest){
         List<PatientRoomSearchResponse> patientRoomSearchResponse=roomService.searchRoom(patientRoomSearchRequest);
         return ResponseEntity.status(HttpStatus.OK).body(patientRoomSearchResponse);
+    }
+
+    @PostMapping("/dropdown")
+    public ResponseEntity<List<RoomDropdownResponse>>getDropdown(@RequestBody RoomDropdownRequest roomDropdownRequest){
+        List<RoomDropdownResponse> dropdownResponse=roomService.getRoomDropdown(roomDropdownRequest);
+        return ResponseEntity.status(HttpStatus.OK).body(dropdownResponse);
     }
 
 
