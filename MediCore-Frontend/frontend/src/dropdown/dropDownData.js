@@ -79,3 +79,40 @@ export const doctorByCategory = async (categoryId) => {
         return [];
     }
 };
+
+export const admissionRegNo = async (regNo) => {
+    try {
+        const response = await axiosInstance.get("/admission/dropdown/search",
+            {
+                params: {regNo}
+            });
+        return response.data.map((item) => ({
+            label: `${item.patientRegNo} - ${item.firstName} ${item.lastName}`,
+            value: item.admissionId,
+            admissionId: item.admissionId,
+            patientId: item.patientId,
+            patientRegNo: item.patientRegNo,
+            state: item.state,
+            stateValue: item.stateValue,
+            firstName: item.firstName,
+            lastName: item.lastName,
+        }));
+    } catch (error) {
+        console.error("Error:", error);
+        return [];
+    }
+};
+
+export const roomData = async (roomCategory, roomType, wardNo) => {
+    try {
+        const response = await axiosInstance.post("/room/dropdown", {
+            roomCategory,
+            roomType,
+            wardNo
+        })
+        return response.data;
+    } catch (error) {
+        console.error('Error:', error);
+        return [];
+    }
+};
