@@ -62,7 +62,7 @@ public class RoomServiceImpl implements RoomService {
             if (r.getRoomNo() != null) {
                 PatientRoom patientRoom = patientRoomRepository.findByRoomNo(r.getRoomNo()).orElse(null);
                 if (patientRoom != null) {
-                    patientRoom.setRoomStatus(1L);
+                    patientRoom.setRoomStatus(2L);
                     patientRoom.setUpdatedOn(new Date());
                     patientRoomRepository.save(patientRoom);
                 }
@@ -105,7 +105,7 @@ public class RoomServiceImpl implements RoomService {
                             patientRoom.setRoomStatus(1L);
                             patientRoom.setUpdatedOn(new Date());
                         } else if (room.getRoomStatus() == 2L) {
-                            patientRoom.setRoomStatus(2L);
+                            patientRoom.setRoomStatus(1L);
                             patientRoom.setUpdatedOn(new Date());
                         }
                     }

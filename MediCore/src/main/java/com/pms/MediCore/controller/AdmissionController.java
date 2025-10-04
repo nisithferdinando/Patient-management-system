@@ -62,7 +62,7 @@ public class AdmissionController {
         return ResponseEntity.status(HttpStatus.OK).body(admission);
     }
 
-    @PostMapping("/dropdown/search")
+    @GetMapping("/dropdown/search")
    public ResponseEntity<List<PatientRegistrationNoResponse>>getAdmissionRegNo(@RequestParam String regNo){
         List<PatientRegistrationNoResponse> patientRegistrationNo= admissionService.getPatientRegistrationNo(regNo);
         return ResponseEntity.status(HttpStatus.OK).body(patientRegistrationNo);
