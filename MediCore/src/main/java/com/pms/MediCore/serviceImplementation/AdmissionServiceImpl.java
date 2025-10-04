@@ -4,13 +4,13 @@ import com.pms.MediCore.dto.request.AdmissionRequest;
 import com.pms.MediCore.dto.request.AdmissionSearchRequest;
 import com.pms.MediCore.dto.response.AdmissionResponse;
 import com.pms.MediCore.dto.response.AdmissionSearchResponse;
+import com.pms.MediCore.dto.response.PatientRegistrationNoResponse;
 import com.pms.MediCore.entity.Admission;
 import com.pms.MediCore.entity.Patient;
-import com.pms.MediCore.repository.AdmissionRepository;
-import com.pms.MediCore.repository.AdmissionSearchRepository;
-import com.pms.MediCore.repository.PatientRepository;
+import com.pms.MediCore.repository.*;
 import com.pms.MediCore.service.AdmissionService;
 import com.pms.MediCore.view.AdmissionSearch;
+import com.pms.MediCore.view.PatientRegistrationNo;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -25,12 +25,16 @@ public class AdmissionServiceImpl implements AdmissionService {
     private final ModelMapper modelMapper;
     private final AdmissionSearchRepository admissionSearchRepository;
     private final PatientRepository patientRepository;
+    private final AdmissionDropdownRepository admissionDropdownRepository;
+    private final PatientDropdownRepository patientDropdownRepository;
 
-    public AdmissionServiceImpl(AdmissionRepository admissionRepository, ModelMapper modelMapper, AdmissionSearchRepository admissionSearchRepository, PatientRepository patientRepository) {
+    public AdmissionServiceImpl(AdmissionRepository admissionRepository, ModelMapper modelMapper, AdmissionSearchRepository admissionSearchRepository, PatientRepository patientRepository, AdmissionDropdownRepository admissionDropdownRepository, PatientDropdownRepository patientDropdownRepository) {
         this.admissionRepository = admissionRepository;
         this.modelMapper = modelMapper;
         this.admissionSearchRepository = admissionSearchRepository;
         this.patientRepository = patientRepository;
+        this.admissionDropdownRepository = admissionDropdownRepository;
+        this.patientDropdownRepository = patientDropdownRepository;
     }
 
     @Override
@@ -98,6 +102,18 @@ public class AdmissionServiceImpl implements AdmissionService {
 
 
             return admission.stream().map(p->modelMapper.map(p, AdmissionSearchResponse.class)).collect(Collectors.toList());
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<PatientRegistrationNoResponse> getPatientRegistrationNo(String regNo){
+        try{
+            List<PatientRegistrationNo> patientRegistrationNo=admissionDropdownRepository.getAdmissionByRegNo(regNo);
+            return patientRegistrationNo.stream().map(p->modelMapper.map(p, PatientRegistrationNoResponse.class)).collect(Collectors.toList());
         }
         catch (Exception e){
             e.printStackTrace();

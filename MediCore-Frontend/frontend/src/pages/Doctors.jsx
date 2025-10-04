@@ -71,7 +71,7 @@ const Doctors = () => {
         }
         try {
             const response = await axiosInstance.post("/doctor/search", formDataClean);
-            await new Promise(resolve => setTimeout(resolve,700));
+            await new Promise(resolve => setTimeout(resolve, 700));
             setDoctors(response.data);
             setActivePage(1);
         } catch (error) {
@@ -92,7 +92,7 @@ const Doctors = () => {
         }
     };
 
-    const handleReset=()=>{
+    const handleReset = () => {
         setFormData({
             firstName: "",
             lastName: "",
@@ -224,54 +224,54 @@ const Doctors = () => {
                 </form>
                 <div className="mt-8">
                     {loading ? (
-                        <div className="flex justify-center items-center p-20">
-                            <ReactLoader loading={loading}/>
-                        </div>):
-                        ( <Table>
-                        <Table.Header>
-                            <Table.Row
-                            >
-                                <Table.HeaderCell>Name</Table.HeaderCell>
-                                <Table.HeaderCell>Category</Table.HeaderCell>
-                                <Table.HeaderCell> Doctor Status</Table.HeaderCell>
-                                <Table.HeaderCell>Ward</Table.HeaderCell>
-                                <Table.HeaderCell>Available</Table.HeaderCell>
-                            </Table.Row>
-                        </Table.Header>
-                        <Table.Body>
-                            {searchDoctor.length === 0 ?
-                                (
-                                    <Table.Row>
-                                        <Table.Cell colSpan="5" textAlign="center">
-                                          <div className="flex justify-center items-center ">
-                                             <img src={search} className="w-72 h-72"/>
-                                          </div>
-                                        </Table.Cell>
-                                    </Table.Row>
-                                ) :
-                                (
-                                    searchDoctor.map((doctor) => (
-                                        <Table.Row key={doctor.id}
-                                                   onDoubleClick={() => handleRowDoubleClick(doctor.id)}
-                                                   style={{cursor: "pointer"}}
-                                        >
-                                            <Table.Cell>{doctor.fullName}</Table.Cell>
-                                            <Table.Cell>{doctor.categoryName}</Table.Cell>
-                                            <Table.Cell>{doctor.statusName}</Table.Cell>
-                                            <Table.Cell>{doctor.wardName}</Table.Cell>
-                                            <Table.Cell>
+                            <div className="flex justify-center items-center p-20">
+                                <ReactLoader loading={loading}/>
+                            </div>) :
+                        (<Table>
+                            <Table.Header>
+                                <Table.Row
+                                >
+                                    <Table.HeaderCell>Name</Table.HeaderCell>
+                                    <Table.HeaderCell>Category</Table.HeaderCell>
+                                    <Table.HeaderCell> Doctor Status</Table.HeaderCell>
+                                    <Table.HeaderCell>Ward</Table.HeaderCell>
+                                    <Table.HeaderCell>Available</Table.HeaderCell>
+                                </Table.Row>
+                            </Table.Header>
+                            <Table.Body>
+                                {searchDoctor.length === 0 ?
+                                    (
+                                        <Table.Row>
+                                            <Table.Cell colSpan="5" textAlign="center">
+                                                <div className="flex justify-center items-center ">
+                                                    <img src={search} className="w-72 h-72"/>
+                                                </div>
+                                            </Table.Cell>
+                                        </Table.Row>
+                                    ) :
+                                    (
+                                        searchDoctor.map((doctor) => (
+                                            <Table.Row key={doctor.id}
+                                                       onDoubleClick={() => handleRowDoubleClick(doctor.id)}
+                                                       style={{cursor: "pointer"}}
+                                            >
+                                                <Table.Cell>{doctor.fullName}</Table.Cell>
+                                                <Table.Cell>{doctor.categoryName}</Table.Cell>
+                                                <Table.Cell>{doctor.statusName}</Table.Cell>
+                                                <Table.Cell>{doctor.wardName}</Table.Cell>
+                                                <Table.Cell>
                                                 <span
                                                     className={`text-white px-2 py-1 rounded-md text-sm font-medium ${doctor.active === 1 ? "bg-blue-500" : "bg-slate-500"}`}>
                                                 {doctor.active === 1 ? "Available" : "Not Available"}
                                         </span>
-                                            </Table.Cell>
+                                                </Table.Cell>
 
-                                        </Table.Row>
-                                    ))
-                                )
-                            }
-                        </Table.Body>
-                    </Table>)
+                                            </Table.Row>
+                                        ))
+                                    )
+                                }
+                            </Table.Body>
+                        </Table>)
                     }
                     {doctors.length > itemsPerPage && (
                         <Pagination

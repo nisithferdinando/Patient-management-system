@@ -4,6 +4,9 @@ import com.pms.MediCore.dto.request.AdmissionRequest;
 import com.pms.MediCore.dto.request.AdmissionSearchRequest;
 import com.pms.MediCore.dto.response.AdmissionResponse;
 import com.pms.MediCore.dto.response.AdmissionSearchResponse;
+import com.pms.MediCore.dto.response.PatientRegistrationNoResponse;
+import com.pms.MediCore.entity.Admission;
+import com.pms.MediCore.view.PatientRegistrationNo;
 
 import java.util.List;
 
@@ -14,4 +17,5 @@ public interface AdmissionService {
     AdmissionResponse getAdmissionById(Long id);
     List<AdmissionResponse> getAllAdmissions();
     List<AdmissionSearchResponse>searchAdmissions(AdmissionSearchRequest admissionSearchRequest);
+    List<PatientRegistrationNoResponse> getPatientRegistrationNo(String patientRegNo);
 }

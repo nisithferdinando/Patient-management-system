@@ -3,8 +3,11 @@ import {doctorWards} from "../dropdown/dropDownData.js";
 import {getKeyData} from "../dropdown/keyValueData.js";
 import axiosInstance from "../util/axiosInstance.js";
 import ReactLoader from "../components/ReactLoader.jsx";
-import {Table, TableHeaderCell} from "semantic-ui-react";
+import {Modal, Pagination, Table, TableHeaderCell} from "semantic-ui-react";
 import search from "../assets/search.jpg";
+import AddPatientRoom from "../components/AddPatientRoom.jsx";
+import {useDispatch} from "react-redux";
+import {clearErrors} from "../slice/patientRoomFormSlice.js";
 
 
 const PatientRoom = () => {
@@ -15,6 +18,7 @@ const PatientRoom = () => {
     const [roomTypes, setRoomTypes] = useState([]);
     const [roomCategory, setRoomCategory] = useState([]);
     const [activePage, setActivePage] = useState(1);
+    const [editPatientRoom, setEditPatientRoom] = useState(null);
     const [formData, setFormData] = useState({
         patientRegNo: "",
         ward: "",
@@ -25,7 +29,7 @@ const PatientRoom = () => {
     const [loading, setLoading] = useState(false);
     const itemsPerPage = 8;
     const totalPages = Math.ceil(patientRoom.length / itemsPerPage);
-
+    const dispatch = useDispatch();
 
     const handlePaginationChange = (e, {activePage}) => {
         setActivePage(activePage);
@@ -55,34 +59,44 @@ const PatientRoom = () => {
         })();
     }, []);
 
-    const handleSearch= async (e)=>{
+    const handleSearch = async (e) => {
         e.preventDefault();
         setLoading(true);
-        const searchPatientRoom={
+        const searchPatientRoom = {
             patientRegNo: formData.patientRegNo || null,
-            ward:formData.ward===""? -2 : parseInt(formData.ward),
-            roomType:formData.ward===""? -2 : parseInt(formData.ward),
-            roomCategory:formData.ward===""? -2 : parseInt(formData.ward),
+            ward: formData.ward === "" ? -2 : parseInt(formData.ward),
+            roomType: formData.roomType === "" ? -2 : parseInt(formData.roomType),
+            roomCategory: formData.roomCategory === "" ? -2 : parseInt(formData.roomCategory),
         }
-        try{
-            const response= await axiosInstance.post("/room/search", searchPatientRoom);
-            await new Promise(resolve => setTimeout(resolve,700));
+        try {
+            const response = await axiosInstance.post("/room/search", searchPatientRoom);
+            await new Promise(resolve => setTimeout(resolve, 700));
             setPatientRoom(response.data);
             setActivePage(1);
-        }
-        catch(error){
+        } catch (error) {
             console.error('Error:', error);
         }
         setLoading(false);
     }
 
+    const handleRowDoubleClick = async (patientId) => {
+        try {
+            const response = await axiosInstance.get(`/room/${patientId}`);
+            setEditPatientRoom(response.data);
+            dispatch(clearErrors());
+            setOpen(true);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
     const handleReset = () => {
-       setFormData({
-           patientRegNo: "",
-           ward: "",
-           roomType: "",
-           roomCategory: ""
-       });
+        setFormData({
+            patientRegNo: "",
+            ward: "",
+            roomType: "",
+            roomCategory: ""
+        });
     }
 
     return (
@@ -90,6 +104,30 @@ const PatientRoom = () => {
             <div className="flex justify-end mt-4">
                 <button className="ui primary button" onClick={() => setOpen(true)}>Add Rooms</button>
             </div>
+            <Modal
+                open={open}
+                onClose={() => {
+                    dispatch(clearErrors());
+                    setOpen(false);
+                    setEditPatientRoom(null);
+                }}
+                size="fullscreen"
+                closeIcon
+                scrolling
+            >
+                <Modal.Header>{editPatientRoom ? "Edit Room" : "Add Room"}</Modal.Header>
+                <Modal.Content scrolling>
+                    <AddPatientRoom
+                        editPaientRoom={editPatientRoom}
+                        onClose={() => {
+                            setOpen(false);
+                            setEditPatientRoom(null);
+                        }}
+                        onSave={handleSearch}
+                    />
+                </Modal.Content>
+
+            </Modal>
             <div className="mt-4 ml-12 min-w-7xl bg-white p-6 rounded-xl shadow-md">
                 <p className="text-blue-900 text-2xl font-semibold mb-4">Search Patient Rooms</p>
                 <form className="space-y-4 mt-4">
@@ -169,10 +207,10 @@ const PatientRoom = () => {
 
                 </form>
                 <div className="mt-8">
-                    {loading? (<div className="flex justify-center items-center p-20">
-                        <ReactLoader loading={loading}/>
+                    {loading ? (<div className="flex justify-center items-center p-20">
+                            <ReactLoader loading={loading}/>
                         </div>
-                        ) : ( <Table>
+                    ) : (<Table>
                             <Table.Header>
                                 <Table.Row>
                                     <TableHeaderCell>Patient Reg No</TableHeaderCell>
@@ -183,31 +221,46 @@ const PatientRoom = () => {
                                 </Table.Row>
                             </Table.Header>
                             <Table.Body>
-                                    {searchPageResults.length===0? (
-                                        <Table.Row>
-                                            <Table.Cell colSpan="5" textAlign="center">
-                                                <div className="flex justify-center items-center ">
-                                                    <img src={search} className="w-72 h-72"/>
-                                                </div>
-                                            </Table.Cell>
+                                {searchPageResults.length === 0 ? (
+                                    <Table.Row>
+                                        <Table.Cell colSpan="5" textAlign="center">
+                                            <div className="flex justify-center items-center ">
+                                                <img src={search} className="w-72 h-72"/>
+                                            </div>
+                                        </Table.Cell>
+                                    </Table.Row>
+                                ) : (
+                                    patientRoom.map((patientRoom) => (
+                                        <Table.Row key={patientRoom.patientId}
+                                                   onDoubleClick={() => handleRowDoubleClick(patientRoom.patientId)}
+                                                   style={{cursor: 'pointer'}}>
+                                            <Table.Cell>{patientRoom.patientRegNo}</Table.Cell>
+                                            <Table.Cell>{patientRoom.fullName}</Table.Cell>
+                                            <Table.Cell>{patientRoom.rooms}</Table.Cell>
+                                            <Table.Cell>{patientRoom.doctor}</Table.Cell>
+                                            <Table.Cell>{patientRoom.roomStatusName}</Table.Cell>
                                         </Table.Row>
-                                    ): (
-                                         patientRoom.map((patientRoom) => (
-                                             <Table.Row key={patientRoom.patientId}>
-                                                 <Table.Cell>{patientRoom.patientRegNo}</Table.Cell>
-                                                 <Table.Cell>{patientRoom.fullName}</Table.Cell>
-                                                 <Table.Cell>{patientRoom.rooms}</Table.Cell>
-                                                 <Table.Cell>{patientRoom.doctor}</Table.Cell>
-                                                 <Table.Cell >{patientRoom.roomStatusName}</Table.Cell>
-                                             </Table.Row>
-                                            ))
-                                    )
-                                    }
+                                    ))
+                                )
+                                }
                             </Table.Body>
                         </Table>
                     )
                     }
-
+                    {patientRoom.length > itemsPerPage && (
+                        <Pagination
+                            activePage={activePage}
+                            totalPages={totalPages}
+                            onPageChange={handlePaginationChange}
+                            siblingRange={1}
+                            boundaryRange={1}
+                            ellipsisItem={null}
+                            firstItem={null}
+                            lastItem={null}
+                            pointing
+                            secondary
+                        />
+                    )}
                 </div>
             </div>
         </div>

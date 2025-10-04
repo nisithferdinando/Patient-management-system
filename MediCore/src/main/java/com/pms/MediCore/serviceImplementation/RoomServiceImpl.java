@@ -1,16 +1,20 @@
 package com.pms.MediCore.serviceImplementation;
 
 import com.pms.MediCore.dto.request.PatientRoomSearchRequest;
+import com.pms.MediCore.dto.request.RoomDropdownRequest;
 import com.pms.MediCore.dto.request.RoomRequest;
 import com.pms.MediCore.dto.response.PatientRoomSearchResponse;
+import com.pms.MediCore.dto.response.RoomDropdownResponse;
 import com.pms.MediCore.dto.response.RoomResponse;
 import com.pms.MediCore.entity.PatientRoom;
 import com.pms.MediCore.entity.Room;
 import com.pms.MediCore.repository.PatientRoomRepository;
 import com.pms.MediCore.repository.PatientRoomSearchRepository;
+import com.pms.MediCore.repository.RoomDropdownRepository;
 import com.pms.MediCore.repository.RoomRepository;
 import com.pms.MediCore.service.RoomService;
 import com.pms.MediCore.view.PatientRoomSearch;
+import com.pms.MediCore.view.RoomDropdown;
 import org.hibernate.jdbc.Expectation;
 import org.hibernate.jdbc.Expectations;
 import org.modelmapper.ModelMapper;
@@ -27,12 +31,14 @@ public class RoomServiceImpl implements RoomService {
     private final ModelMapper modelMapper;
     private final PatientRoomRepository patientRoomRepository;
     private final PatientRoomSearchRepository patientRoomSearchRepository;
+    private final RoomDropdownRepository roomDropdownRepository;
 
-    public RoomServiceImpl(RoomRepository roomRepository, ModelMapper modelMapper, PatientRoomRepository patientRoomRepository, PatientRoomSearchRepository patientRoomSearchRepository) {
+    public RoomServiceImpl(RoomRepository roomRepository, ModelMapper modelMapper, PatientRoomRepository patientRoomRepository, PatientRoomSearchRepository patientRoomSearchRepository, RoomDropdownRepository roomDropdownRepository) {
         this.roomRepository = roomRepository;
         this.modelMapper = modelMapper;
         this.patientRoomRepository = patientRoomRepository;
         this.patientRoomSearchRepository = patientRoomSearchRepository;
+        this.roomDropdownRepository = roomDropdownRepository;
     }
 
     @Override
@@ -56,7 +62,7 @@ public class RoomServiceImpl implements RoomService {
             if (r.getRoomNo() != null) {
                 PatientRoom patientRoom = patientRoomRepository.findByRoomNo(r.getRoomNo()).orElse(null);
                 if (patientRoom != null) {
-                    patientRoom.setRoomStatus(1L);
+                    patientRoom.setRoomStatus(2L);
                     patientRoom.setUpdatedOn(new Date());
                     patientRoomRepository.save(patientRoom);
                 }
@@ -99,7 +105,7 @@ public class RoomServiceImpl implements RoomService {
                             patientRoom.setRoomStatus(1L);
                             patientRoom.setUpdatedOn(new Date());
                         } else if (room.getRoomStatus() == 2L) {
-                            patientRoom.setRoomStatus(2L);
+                            patientRoom.setRoomStatus(1L);
                             patientRoom.setUpdatedOn(new Date());
                         }
                     }
@@ -125,5 +131,15 @@ public class RoomServiceImpl implements RoomService {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public List<RoomDropdownResponse> getRoomDropdown(RoomDropdownRequest roomDropdownRequest) {
+        List<RoomDropdown> roomDropdown = roomDropdownRepository.getRoomsByCategory(
+                roomDropdownRequest.getRoomCategory(),
+                roomDropdownRequest.getRoomType(),
+                roomDropdownRequest.getWardNo()
+        );
+        return roomDropdown.stream().map(r->modelMapper.map(r, RoomDropdownResponse.class)).collect(Collectors.toList());
     }
 }
