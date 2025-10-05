@@ -88,8 +88,8 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Override
-    public List<PatientFoodResponse> getAllPatientFood(){
-        List<PatientFood> patientFood= patientFoodRepository.findAllByActive(2L);
+    public List<PatientFoodResponse> getAllPatientFood(Long mealType){
+        List<PatientFood> patientFood= patientFoodRepository.findAllByMealTypeAndActive(mealType, 1L);
         return patientFood.stream().map(f->modelMapper.map(f,PatientFoodResponse.class)).collect(Collectors.toList());
     }
 

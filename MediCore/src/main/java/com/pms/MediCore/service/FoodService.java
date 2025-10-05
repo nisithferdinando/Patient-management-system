@@ -16,6 +16,6 @@ public interface FoodService {
     FoodResponse updateFood(Long id, FoodRequest foodRequest);
     List<FoodSearchResponse> searchFood(FoodSearchRequest foodSearchRequest);
     FoodDetailsResponse getFoodDetails(FoodDetailsRequest foodDetailsRequest);
-    List<PatientFoodResponse> getAllPatientFood();
+    List<PatientFoodResponse> getAllPatientFood(Long mealType);
 
 }

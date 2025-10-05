@@ -55,7 +55,7 @@ public class FoodController {
 
     @GetMapping("/food")
     public ResponseEntity<List<PatientFoodResponse>>getAllPatientFood(@RequestParam("mealType") Long mealType){
-        List<PatientFoodResponse> patientFoodResponse= foodService.getAllPatientFood();
+        List<PatientFoodResponse> patientFoodResponse= foodService.getAllPatientFood(mealType);
         return ResponseEntity.status(HttpStatus.OK).body(patientFoodResponse);
     }
 }

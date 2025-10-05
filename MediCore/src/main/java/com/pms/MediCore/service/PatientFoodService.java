@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface PatientFoodService {
 
-    List<PatientFoodResponse> getAllPatientFood();
+    List<PatientFoodResponse> getAllPatientFood(Long mealType);
 }

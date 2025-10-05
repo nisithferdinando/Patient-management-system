@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface PatientFoodRepository extends JpaRepository<PatientFood, Long> {
-    List<PatientFood> findAllByActive(Long active);
+    List<PatientFood> findAllByMealTypeAndActive(Long mealType, Long active);
 }
