@@ -6,6 +6,7 @@ import com.pms.MediCore.dto.request.FoodSearchRequest;
 import com.pms.MediCore.dto.response.FoodDetailsResponse;
 import com.pms.MediCore.dto.response.FoodResponse;
 import com.pms.MediCore.dto.response.FoodSearchResponse;
+import com.pms.MediCore.dto.response.PatientFoodResponse;
 import com.pms.MediCore.service.FoodService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,5 +51,11 @@ public class FoodController {
     public ResponseEntity<FoodDetailsResponse> getFoodDetails(@RequestBody FoodDetailsRequest foodDetailsRequest){
         FoodDetailsResponse food=foodService.getFoodDetails(foodDetailsRequest);
         return ResponseEntity.status(HttpStatus.OK).body(food);
+    }
+
+    @GetMapping("/food")
+    public ResponseEntity<List<PatientFoodResponse>>getAllPatientFood(@RequestParam("mealType") Long mealType){
+        List<PatientFoodResponse> patientFoodResponse= foodService.getAllPatientFood();
+        return ResponseEntity.status(HttpStatus.OK).body(patientFoodResponse);
     }
 }

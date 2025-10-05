@@ -6,11 +6,15 @@ import com.pms.MediCore.dto.request.FoodSearchRequest;
 import com.pms.MediCore.dto.response.FoodDetailsResponse;
 import com.pms.MediCore.dto.response.FoodResponse;
 import com.pms.MediCore.dto.response.FoodSearchResponse;
+import com.pms.MediCore.dto.response.PatientFoodResponse;
 import com.pms.MediCore.entity.Food;
+import com.pms.MediCore.entity.PatientFood;
 import com.pms.MediCore.repository.FoodDetailsRepository;
 import com.pms.MediCore.repository.FoodRepository;
 import com.pms.MediCore.repository.FoodSearchRepository;
+import com.pms.MediCore.repository.PatientFoodRepository;
 import com.pms.MediCore.service.FoodService;
+import com.pms.MediCore.service.PatientFoodService;
 import com.pms.MediCore.view.FoodDetails;
 import com.pms.MediCore.view.FoodSearch;
 import org.modelmapper.ModelMapper;
@@ -27,12 +31,14 @@ public class FoodServiceImpl implements FoodService {
     private final FoodRepository foodRepository;
     private final FoodSearchRepository foodSearchRepository;
     private final FoodDetailsRepository foodDetailsRepository;
+    private final PatientFoodRepository patientFoodRepository;
 
-    public FoodServiceImpl(FoodRepository foodRepository, ModelMapper modelMapper, FoodSearchRepository foodSearchRepository, FoodDetailsRepository foodDetailsRepository) {
+    public FoodServiceImpl(FoodRepository foodRepository, ModelMapper modelMapper, FoodSearchRepository foodSearchRepository, FoodDetailsRepository foodDetailsRepository, PatientFoodRepository patientFoodRepository) {
         this.foodRepository=foodRepository;
         this.modelMapper = modelMapper;
         this.foodSearchRepository = foodSearchRepository;
         this.foodDetailsRepository=foodDetailsRepository;
+        this.patientFoodRepository=patientFoodRepository;
     }
 
     @Override
@@ -80,4 +86,11 @@ public class FoodServiceImpl implements FoodService {
         );
         return modelMapper.map(food, FoodDetailsResponse.class);
     }
+
+    @Override
+    public List<PatientFoodResponse> getAllPatientFood(){
+        List<PatientFood> patientFood= patientFoodRepository.findAllByActive(2L);
+        return patientFood.stream().map(f->modelMapper.map(f,PatientFoodResponse.class)).collect(Collectors.toList());
+    }
+
 }
