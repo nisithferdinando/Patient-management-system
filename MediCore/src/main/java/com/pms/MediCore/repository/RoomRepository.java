@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface RoomRepository extends JpaRepository<Room, Long> {
     List<Room> findByPatientIdAndActive(Long patientId, Long active);
-
+    List<Room> findByRoomStatus(Long RoomStatus);
 }

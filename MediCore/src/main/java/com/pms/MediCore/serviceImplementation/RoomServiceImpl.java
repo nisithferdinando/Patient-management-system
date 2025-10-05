@@ -142,4 +142,10 @@ public class RoomServiceImpl implements RoomService {
         );
         return roomDropdown.stream().map(r->modelMapper.map(r, RoomDropdownResponse.class)).collect(Collectors.toList());
     }
+
+    @Override
+    public List<RoomResponse> getRoomByPatientRegNo(Long roomStatus){
+        List<Room> room= roomRepository.findByRoomStatus(2L);
+        return room.stream().map(rooms-> modelMapper.map(rooms, RoomResponse.class)).collect(Collectors.toList());
+    }
 }
