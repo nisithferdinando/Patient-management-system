@@ -114,7 +114,6 @@ const AddFood = ({editFood, onClose, onSave}) => {
                 await axiosInstance.put(`food/update/${editFood.id}`, food);
                 await new Promise(resolve => setTimeout(resolve, 500));
                 toast.success("Food updated successfully.");
-                handleResetFood();
             } else {
                 const response = await axiosInstance.post("/food/add", food);
                 await new Promise(resolve => setTimeout(resolve, 400));
