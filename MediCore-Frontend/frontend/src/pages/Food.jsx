@@ -2,8 +2,11 @@ import React, {useEffect, useState} from 'react'
 import {getKeyData} from "../dropdown/keyValueData.js";
 import axiosInstance from "../util/axiosInstance.js";
 import ReactLoader from "../components/ReactLoader.jsx";
-import {Pagination, Table} from "semantic-ui-react";
+import {Modal, Pagination, Table} from "semantic-ui-react";
 import search from "../assets/search.jpg";
+import AddFood from "../components/Patients/AddFood.jsx";
+import {useDispatch} from "react-redux";
+import {clearErrors} from "../slice/patientFoodFormSlice.js";
 
 const Food = () => {
 
@@ -18,6 +21,8 @@ const Food = () => {
     const [activePage, setActivePage] = useState(1);
     const itemsPerPage = 8;
     const totalPages = Math.ceil(food.length / itemsPerPage);
+    const [editFood, setEditFood] = useState(null);
+    const dispatch = useDispatch();
 
     const handlePaginationChange = (e, {activePage}) => {
         setActivePage(activePage);
@@ -61,6 +66,24 @@ const Food = () => {
         }
         setLoading(false);
     };
+    console.log("food", food);
+
+    const handleRowDoubleClick = async (foodItem) => {
+        const foodDetails = {
+            id: foodItem.id,
+            patientId: foodItem.patientId,
+        }
+        console.log("food details", foodDetails);
+        try {
+            const response = await axiosInstance.post("/food/get", foodDetails);
+            setEditFood(response.data);
+            dispatch(clearErrors());
+            setOpen(true);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
     const handleReset = () => {
         setFormData({
             patientRegNo: "",
@@ -70,11 +93,33 @@ const Food = () => {
             active: ""
         })
     };
-
     return (<div>
         <div className="flex justify-end mt-4">
             <button className="ui primary button" onClick={() => setOpen(true)}>Add Meal</button>
         </div>
+        <Modal
+            open={open}
+            onClose={() => {
+                dispatch(clearErrors());
+                setOpen(false);
+                setEditFood(null);
+            }}
+            size="large"
+            closeIcon
+        >
+            <Modal.Header>New Food</Modal.Header>
+            <Modal.Content>
+                <AddFood
+                    editFood={editFood}
+                    onClose={() => {
+                        setOpen(false)
+                        setEditFood(null);
+                    }}
+                    onSave={handleSearch}
+                />
+            </Modal.Content>
+
+        </Modal>
         <div className="mt-4 ml-12 min-w-7xl bg-white p-6 rounded-xl shadow-md">
             <p className="text-blue-900 text-2xl font-semibold mb-4">Search Patient Meals</p>
             <form className="space-y-4 mt-4">
@@ -90,7 +135,6 @@ const Food = () => {
                             onChange={handleChange}
                             className="w-full border border-slate-300 rounded-md shadow-sm py-3 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                             value={formData.patientRegNo}
-
                         />
                     </div>
                     <div>
@@ -181,7 +225,7 @@ const Food = () => {
                         <Table.Body>
                             {searchFood.length === 0 ? (
                                 <Table.Row>
-                                    <Table.Cell colSpan="5" textAlign="center">
+                                    <Table.Cell colSpan="7" textAlign="center">
                                         <div className="flex justify-center items-center ">
                                             <img src={search} className="w-72 h-72"/>
                                         </div>
@@ -189,13 +233,16 @@ const Food = () => {
                                 </Table.Row>
                             ) : (
                                 searchFood.map((food) => (
-                                    <Table.Row key={food.id}>
+                                    <Table.Row key={food.id} onDoubleClick={() => {
+                                        handleRowDoubleClick(food)
+                                    }}
+                                               style={{cursor: 'pointer'}}>
                                         <Table.Cell>{food.patientRegNo}</Table.Cell>
                                         <Table.Cell>{food.patientName}</Table.Cell>
                                         <Table.Cell>{food.roomNo}</Table.Cell>
                                         <Table.Cell>{food.mealTypeName}</Table.Cell>
                                         <Table.Cell>{food.mealName}</Table.Cell>
-                                        <Table.Cell>{food.mealDate? food.mealDate.split("T")[0] : ""}</Table.Cell>
+                                        <Table.Cell>{food.mealDate ? food.mealDate.split("T")[0] : ""}</Table.Cell>
                                         <Table.Cell>{food.activeValue}</Table.Cell>
                                     </Table.Row>
                                 ))
