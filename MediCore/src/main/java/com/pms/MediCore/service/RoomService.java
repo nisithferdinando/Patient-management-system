@@ -17,5 +17,6 @@ public interface RoomService {
     List<RoomResponse> updateRoom(List<RoomRequest> roomRequest);
     List<PatientRoomSearchResponse> searchRoom(PatientRoomSearchRequest patientRoomSearchRequest);
     List<RoomDropdownResponse> getRoomDropdown(RoomDropdownRequest roomDropdownRequest );
+    List<RoomResponse> getRoomByPatientRegNo(Long roomStatus);
 
 }

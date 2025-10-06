@@ -57,5 +57,12 @@ public class RoomController {
         return ResponseEntity.status(HttpStatus.OK).body(dropdownResponse);
     }
 
+    @GetMapping("/dropdown/patientRegNo")
+    public ResponseEntity<List<RoomResponse>> getRoomsByPatientRegNo( @RequestParam (defaultValue = "2") Long roomStatus){
+        List<RoomResponse> roomResponse= roomService.getRoomByPatientRegNo
+                (roomStatus);
+        return ResponseEntity.status(HttpStatus.OK).body(roomResponse);
+    }
+
 
 }

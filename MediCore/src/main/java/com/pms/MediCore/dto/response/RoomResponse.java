@@ -135,7 +135,7 @@ public class RoomResponse {
    public Date getUpdatedDate(){
         return updatedDate;
    }
-   public void setUpdateDate(Date updatedDate){
+   public void setUpdatedDate(Date updatedDate){
         this.updatedDate=updatedDate;
    }
 }

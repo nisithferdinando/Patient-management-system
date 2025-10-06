@@ -24,15 +24,12 @@ export const nameSearchDropdown = async (value, schema, tableName) => {
     try {
         const response = await axiosInstance.get("/dropdown/names", {
             params: {
-                schema,
-                tableName,
-                search: value,
+                schema, tableName, search: value,
             }
         });
 
         return response.data.map(item => ({
-            label: item.fullName,
-            value: item.id,
+            label: item.fullName, value: item.id,
         }));
     } catch (error) {
         console.error("Name dropdown error:", error);
@@ -42,10 +39,9 @@ export const nameSearchDropdown = async (value, schema, tableName) => {
 
 export const patientRegNoDropdown = async (regNo) => {
     try {
-        const response = await axiosInstance.get("/patient/dropdown/search",
-            {
-                params: {regNo}
-            });
+        const response = await axiosInstance.get("/patient/dropdown/search", {
+            params: {regNo}
+        });
         return response.data.map(item => ({
             label: `${item.regNo}-${item.firstName} ${item.lastName}`,
             value: item.patientId,
@@ -63,16 +59,11 @@ export const patientRegNoDropdown = async (regNo) => {
 
 export const doctorByCategory = async (categoryId) => {
     try {
-        const response = await axiosInstance.get("/doctor/get/doctors",
-            {
-                params: {category: categoryId},
-            });
+        const response = await axiosInstance.get("/doctor/get/doctors", {
+            params: {category: categoryId},
+        });
         return response.data.map(item => ({
-            label: `${item.firstName} ${item.lastName}`,
-            value: item.id,
-            state: item.state,
-            docId: item.docId,
-            ...item,
+            label: `${item.firstName} ${item.lastName}`, value: item.id, state: item.state, docId: item.docId, ...item,
         }));
     } catch (error) {
         console.error("Error:", error);
@@ -82,10 +73,9 @@ export const doctorByCategory = async (categoryId) => {
 
 export const admissionRegNo = async (regNo) => {
     try {
-        const response = await axiosInstance.get("/admission/dropdown/search",
-            {
-                params: {regNo}
-            });
+        const response = await axiosInstance.get("/admission/dropdown/search", {
+            params: {regNo}
+        });
         return response.data.map((item) => ({
             label: `${item.patientRegNo} - ${item.firstName} ${item.lastName}`,
             value: item.admissionId,
@@ -106,9 +96,7 @@ export const admissionRegNo = async (regNo) => {
 export const roomData = async (roomCategory, roomType, wardNo) => {
     try {
         const response = await axiosInstance.post("/room/dropdown", {
-            roomCategory,
-            roomType,
-            wardNo
+            roomCategory, roomType, wardNo
         })
         return response.data;
     } catch (error) {
@@ -116,3 +104,38 @@ export const roomData = async (roomCategory, roomType, wardNo) => {
         return [];
     }
 };
+
+export const foodDetails = async (mealType) => {
+    try {
+        const response = await axiosInstance.get(`food/food`, {
+            params: {mealType: Number(mealType)},
+        });
+        return response.data.map((item) => ({
+            label: item.mealName,
+            value: item.mealId,
+            mealName: item.mealName,
+            mealId: item.mealId,
+            mealCode: item.mealCode,
+        }))
+    } catch (error) {
+        console.error('Error:', error);
+        return [];
+    }
+};
+
+export const patientFoodRegNo = async () => {
+    try {
+        const response = await axiosInstance.get("room/dropdown/patientRegNo");
+        return response.data.map((item) => ({
+            label: item.patientRegNo,
+            value: item.patientId,
+            patientRegNo: item.patientRegNo,
+            patientId: item.patientId,
+            roomId: item.roomId,
+            roomNo: item.roomNo,
+        }))
+    } catch (error) {
+        console.error('Error:', error);
+        return [];
+    }
+}
