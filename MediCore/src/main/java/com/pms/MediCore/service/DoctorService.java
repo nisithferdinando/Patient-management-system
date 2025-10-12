@@ -13,7 +13,6 @@ public interface DoctorService {
    DoctorRequest addDoctor(DoctorRequest doctorRequest);
    List<DoctorResponse> getAllDoctors();
    DoctorResponse getDoctorById(Long id);
-
    DoctorResponse updateDoctor(DoctorRequest doctorRequest, Long id);
    void deleteDoctor(Long id);
    List<DoctorSearchResponse> searchDoctor(DoctorSearchRequest doctorSearchRequest);
